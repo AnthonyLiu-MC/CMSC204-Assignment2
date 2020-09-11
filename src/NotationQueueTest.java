@@ -14,6 +14,9 @@ public class NotationQueueTest {
 	// STUDENT: student tests will use the doubleQ
 	public NotationQueue<Double> doubleQ;
 	// STUDENT: add variables as needed for your student tests
+	Double first = new Double(1.0);
+	Double second = new Double(2.0);
+	Double third = new Double(3.0);
 
 	@Before
 	public void setUp() throws Exception {
@@ -23,6 +26,11 @@ public class NotationQueueTest {
 		stringQ.enqueue(c);
 
 		// STUDENT: add setup for doubleQ for student tests
+		
+		doubleQ = new NotationQueue<Double>(6);
+		doubleQ.enqueue(first);
+		doubleQ.enqueue(second);
+		doubleQ.enqueue(third);
 	}
 
 	@After
@@ -58,8 +66,18 @@ public class NotationQueueTest {
 
 	@Test
 	public void testDequeueStudent() {
-		// Use the doubleQ for student tests
-		fail("Not yet implemented");
+		try {
+			assertEquals(first, doubleQ.dequeue());
+			assertEquals(second, doubleQ.dequeue());
+			assertEquals(third, doubleQ.dequeue());
+			// Queue is empty, next statement should cause QueueUnderFlowException
+			doubleQ.dequeue();
+			assertTrue("This should have caused an QueueUnderflowException", false);
+		} catch (QueueUnderflowException e) {
+			assertTrue("This should have caused an QueueUnderflowException", true);
+		} catch (Exception e) {
+			assertTrue("This should have caused an QueueUnderflowException", false);
+		}
 	}
 
 	@Test
@@ -92,8 +110,21 @@ public class NotationQueueTest {
 
 	@Test
 	public void testEnqueueStudent() {
-		// Use the doubleQ for student tests
-		fail("Not yet implemented");
+		try {
+			assertEquals(3, doubleQ.size());
+			assertEquals(true, doubleQ.enqueue(first));
+			assertEquals(4, doubleQ.size());
+			assertEquals(true, doubleQ.enqueue(second));
+			assertEquals(5, doubleQ.size());
+			doubleQ.enqueue(third);
+			assertEquals(6, doubleQ.size());
+			doubleQ.enqueue(first);
+			assertTrue("This should have caused an QueueOverflowException", false);
+		} catch (QueueOverflowException e) {
+			assertTrue("This should have caused an QueueOverflowException", true);
+		} catch (Exception e) {
+			assertTrue("This should have caused an QueueOverflowException", false);
+		}
 	}
 
 	@Test
@@ -114,9 +145,14 @@ public class NotationQueueTest {
 	}
 
 	@Test
-	public void testToStringStudent() {
+	public void testToStringStudent() throws QueueOverflowException {
 		// Use the doubleQ for student tests
-		fail("Not yet implemented");
+		System.out.print(doubleQ.toString());
+		assertEquals("1.02.03.0", doubleQ.toString());
+		doubleQ.enqueue(first);
+		assertEquals("1.02.03.01.0", doubleQ.toString());
+		doubleQ.enqueue(second);
+		assertEquals("1.02.03.01.02.0", doubleQ.toString());
 	}
 
 	@Test
