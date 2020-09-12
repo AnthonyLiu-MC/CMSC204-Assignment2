@@ -147,7 +147,6 @@ public class NotationQueueTest {
 	@Test
 	public void testToStringStudent() throws QueueOverflowException {
 		// Use the doubleQ for student tests
-		System.out.print(doubleQ.toString());
 		assertEquals("1.02.03.0", doubleQ.toString());
 		doubleQ.enqueue(first);
 		assertEquals("1.02.03.01.0", doubleQ.toString());
