@@ -1,5 +1,20 @@
+/***********************************************************************
+ Class: CMSC204 CRN 22378
+ Program: Assignment # 2
+ Instructor: Professor Alexander
+ Description: Generic Notation Stack Class
+ Due: 09/30/2020
+ I pledge that I have completed the programming assignment independently.
+ I have not copied the code from a student or any source.
+ Anthony Liu
+************************************************************************/
 import java.util.ArrayList;
-
+/**
+ * Generic notation stack class 
+ * @author Anthony Liu
+ *
+ * @param <T>
+ */
 public class NotationStack<T> implements StackInterface<T>{
 
 	private ArrayList<T> stack;
@@ -48,6 +63,9 @@ public class NotationStack<T> implements StackInterface<T>{
 
 	@Override
 	public T top() throws StackUnderflowException{
+		if (stack.size() == 0) {
+			throw new StackUnderflowException();
+		}
 		return stack.get(stack.size()-1);
 	}
 

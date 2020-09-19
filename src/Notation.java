@@ -1,27 +1,33 @@
-
+/***********************************************************************
+ Class: CMSC204 CRN 22378
+ Program: Assignment # 2
+ Instructor: Professor Alexander
+ Description: Notation Class
+ Due: 09/30/2020
+ I pledge that I have completed the programming assignment independently.
+ I have not copied the code from a student or any source.
+ Anthony Liu
+************************************************************************/
+/**
+ * Notation Class 
+ * 
+ * @author Anthony Liu
+ *
+ */
 public class Notation {
 
+	/**
+	 * Convert an infix expression into a postfix expression
+	 * @param infix The infix expression in string format
+	 * @return The postfix expression in a string format
+	 * @throws InvalidNotationFormatException If the infix expression format is invalid
+	 */
 	public static String convertInfixToPostfix(String infix) throws InvalidNotationFormatException {
 
 		NotationQueue<Character> queue = new NotationQueue<>(infix.length());
 		NotationStack<Character> stack = new NotationStack<>(infix.length());
 		char[] str = infix.toCharArray();
 
-		int left = 0;
-		int right = 0;
-		for (int i = 0; i < str.length; i++) {
-			if (str[i] == '(') {
-				left++;
-				continue;
-			}
-			if (str[i] == ')') {
-				right++;
-				continue;
-			}
-		}
-		if (left != right) {
-			throw new InvalidNotationFormatException();
-		}
 		try {
 			for (char current : str) {
 				if (current == ' ') {
@@ -58,12 +64,17 @@ public class Notation {
 
 			}
 		} catch (QueueOverflowException | StackOverflowException | StackUnderflowException ignore) {
-
+			throw new InvalidNotationFormatException();
 		}
 		return queue.toString();
 
 	}
-
+	/**
+	 * Converts the postfix expression to the infix expression
+	 * @param postfix The postfix expression in string format
+	 * @return The infix expression in string format
+	 * @throws InvalidNotationFormatException If the postfix expression format is invalid
+	 */
 	public static String convertPostfixToInfix(String postfix) throws InvalidNotationFormatException {
 
 		NotationStack<String> stack = new NotationStack<>(postfix.length());
@@ -92,14 +103,19 @@ public class Notation {
 			}
 
 		} catch (StackUnderflowException | StackOverflowException ignore) {
-
+			throw new InvalidNotationFormatException();
 		}
 		if (stack.size() > 1) {
 			throw new InvalidNotationFormatException();
 		}
 		return stack.toString();
 	}
-
+/**
+ * Evaluates a postfix expression from a string to a double
+ * @param postfixExpr The postfix expression in String format
+ * @return The evaluation of the postfix expression as a double 
+ * @throws InvalidNotationFormatException If the postfix expression format is invalid
+ */
 	public static double evaluatePostfixExpression(String postfixExpr) throws InvalidNotationFormatException {
 
 		NotationStack<Double> stack = new NotationStack<>(postfixExpr.length());
@@ -140,7 +156,7 @@ public class Notation {
 			}
 
 		} catch (StackOverflowException | StackUnderflowException ignore) {
-
+			throw new InvalidNotationFormatException();
 		}
 
 		if (stack.size() > 1) {
@@ -149,6 +165,15 @@ public class Notation {
 
 		return Double.parseDouble(stack.toString());
 
+	}
+	/**
+	 * Evaluates a infix expression from a String to double
+	 * @param infixExpr The infix expression in String format
+	 * @return The evaluation of the infix method as a double
+	 * @throws InvalidNotationFormatException If the infix expression format is invalid
+	 */
+	public static double evaluateInfixExpression(String infixExpr) throws InvalidNotationFormatException {
+		return evaluatePostfixExpression(convertInfixToPostfix(infixExpr));
 	}
 
 }

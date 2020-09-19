@@ -1,3 +1,13 @@
+/***********************************************************************
+ Class: CMSC204 CRN 22378
+ Program: Assignment # 2
+ Instructor: Professor Alexander
+ Description: Notation Queue Test file
+ Due: 09/30/2020
+ I pledge that I have completed the programming assignment independently.
+ I have not copied the code from a student or any source.
+ Anthony Liu
+************************************************************************/
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
