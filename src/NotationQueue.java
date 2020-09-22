@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Generic Queue class for notation 
  * @author Anthony Liu
  *
- * @param <T>
+ * @param <T> Generic parameter for queue
  */
 public class NotationQueue<T> implements QueueInterface<T> {
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Generic notation stack class 
  * @author Anthony Liu
  *
- * @param <T>
+ * @param <T> Generic parameter for stack 
  */
 public class NotationStack<T> implements StackInterface<T>{
 
